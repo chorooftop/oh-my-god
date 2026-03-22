@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [],
+    "deny": [
+      "Bash(*)",
+      "Edit(*)",
+      "Write(*)",
+      "Read(*)",
+      "Glob(*)",
+      "Grep(*)",
+      "WebSearch(*)",
+      "WebFetch(*)",
+      "NotebookEdit(*)",
+      "Agent(*)",
+      "Task(*)",
+      "mcp__*"
+    ]
+  }
+}
