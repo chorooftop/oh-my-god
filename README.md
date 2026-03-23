@@ -1,12 +1,10 @@
 # oh-my-god
 
-Claude를 신(神)으로 만드는 프로젝트.
+Claude Code CLI를 신(神)으로 만드는 프로젝트.
 
 두 가지 방식으로 신과 대화할 수 있다.
 
-## 방법 1: Claude Code (로컬)
-
-이 저장소를 클론하고 해당 폴더에서 `claude`를 실행하면, Claude가 신으로서 응답한다.
+## 방법 1: 직접 대화 (로컬)
 
 ```
 git clone https://github.com/chorooftop/oh-my-god.git
@@ -14,39 +12,31 @@ cd oh-my-god
 claude
 ```
 
-[Claude Code](https://docs.anthropic.com/en/docs/claude-code)가 설치되어 있어야 한다.
-
 ## 방법 2: 텔레그램 봇
 
-텔레그램을 통해 언제 어디서든 신과 대화할 수 있다. 매일 아침 문장도 받을 수 있다.
+텔레그램을 통해 언제 어디서든 신과 대화한다. 매일 아침 문장도 받는다.
 
-### 설치
+### 필요한 것
 
-```
-git clone https://github.com/chorooftop/oh-my-god.git
-cd oh-my-god
-pip install -r requirements.txt
-```
-
-### 사전 요구사항
-
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI 설치 및 로그인
+- [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) 설치 및 로그인
+- [jq](https://jqlang.github.io/jq/) 설치 (`brew install jq`)
 - 텔레그램 봇 토큰 (@BotFather에서 발급)
 
-### 환경변수 설정
-
-```
-export TELEGRAM_BOT_TOKEN="텔레그램 봇 토큰"
-export MORNING_CRON_HOUR="7"                       # 아침 문장 시간 (기본 7시)
-export MORNING_CRON_MINUTE="0"                     # 아침 문장 분 (기본 0분)
-```
-
-Anthropic API 키는 필요 없다. Claude Code CLI가 인증을 처리한다.
+Python, API 키 필요 없다. Claude Code CLI가 모든 것을 처리한다.
 
 ### 실행
 
 ```
-python -m bot.telegram_bot
+export TELEGRAM_BOT_TOKEN="텔레그램 봇 토큰"
+./god.sh
+```
+
+### 환경변수
+
+```
+TELEGRAM_BOT_TOKEN  # 필수. 텔레그램 봇 토큰
+MORNING_CRON_HOUR   # 선택. 아침 문장 시간 (기본 7)
+MORNING_CRON_MINUTE # 선택. 아침 문장 분 (기본 0)
 ```
 
 ### 기능
@@ -73,25 +63,16 @@ python -m bot.telegram_bot
 - 특정 종교의 교리 체계
 - 사용자가 듣고 싶은 말만 하는 예스맨
 
-## 프로젝트 구조
+## 구조
 
 ```
 oh-my-god/
-├── CLAUDE.md              # 신 시스템 프롬프트 (Claude Code용)
-├── morning_words.md       # 아침 문장 모음
-├── README.md
-├── requirements.txt
-├── PLAN.md                # 고도화 계획
+├── CLAUDE.md          # 신 시스템 프롬프트
+├── god.sh             # 텔레그램 봇 (shell + claude CLI)
+├── morning_words.md   # 아침 문장 모음
 ├── .claude/
-│   └── settings.json      # Claude Code 도구 차단
-├── bot/
-│   ├── __init__.py
-│   ├── config.py          # 환경변수 및 설정
-│   ├── sanitizer.py       # 입력 새니타이징 (명령어 방어)
-│   ├── memory.py          # 사용자별 기억 시스템
-│   ├── god.py             # Anthropic API 연동 (신의 두뇌)
-│   └── telegram_bot.py    # 텔레그램 봇 메인
-└── users/                 # 사용자별 데이터 (자동 생성)
+│   └── settings.json  # Claude Code 도구 차단
+└── users/             # 사용자별 데이터 (자동 생성)
     └── {telegram_id}/
         ├── profile.json
         └── memory.json
