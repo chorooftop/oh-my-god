@@ -28,15 +28,20 @@ cd oh-my-god
 pip install -r requirements.txt
 ```
 
+### 사전 요구사항
+
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI 설치 및 로그인
+- 텔레그램 봇 토큰 (@BotFather에서 발급)
+
 ### 환경변수 설정
 
 ```
 export TELEGRAM_BOT_TOKEN="텔레그램 봇 토큰"
-export ANTHROPIC_API_KEY="Anthropic API 키"
-export CLAUDE_MODEL="claude-sonnet-4-20250514"    # 선택사항
 export MORNING_CRON_HOUR="7"                       # 아침 문장 시간 (기본 7시)
 export MORNING_CRON_MINUTE="0"                     # 아침 문장 분 (기본 0분)
 ```
+
+Anthropic API 키는 필요 없다. Claude Code CLI가 인증을 처리한다.
 
 ### 실행
 
